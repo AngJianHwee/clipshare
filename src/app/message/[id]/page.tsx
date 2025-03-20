@@ -10,7 +10,6 @@ import { format } from 'date-fns';
 import Nav from '@/components/Nav';
 import Link from 'next/link';
 
-// Define the interface for the message
 interface Message {
   id: string;
   content: string;
@@ -19,12 +18,13 @@ interface Message {
   isPinned: boolean;
 }
 
-// Use a type that aligns with Client Component expectations
-interface ClientPageProps {
+// Define props explicitly for Client Component
+interface MessagePageProps {
   params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function MessagePage({ params }: ClientPageProps) {
+export default function MessagePage({ params }: MessagePageProps) {
   const [message, setMessage] = useState<Message | null>(null);
 
   useEffect(() => {
