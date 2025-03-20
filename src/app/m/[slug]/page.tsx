@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import Nav from '@/components/Nav';
 import Link from 'next/link';
+import type { NextPage } from 'next'; // Import Next.js page type
 
 interface Message {
   id: string;
@@ -15,7 +16,12 @@ interface Message {
   isPinned: boolean;
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+// Define props type using NextPage or directly with params and searchParams
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/messages`);
   const messages: Message[] = await res.json();
   const message = messages.find(msg => msg.readableSlug === params.slug);
@@ -25,7 +31,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function ReadableLinkPage({ params }: { params: { slug: string } }) {
+// Use explicit type for Server Component props
+export default async function ReadableLinkPage({
+  params,
+}: {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/messages`);
   if (!res.ok) throw new Error('Failed to fetch messages');
   const messages: Message[] = await res.json();
