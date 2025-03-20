@@ -16,32 +16,25 @@ interface Message {
   isPinned: boolean;
 }
 
-// Define props type using NextPage or directly with params and searchParams
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/messages`);
-  const messages: Message[] = await res.json();
-  const message = messages.find(msg => msg.readableSlug === params.slug);
+// export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+//   const resolvedParams = await params; // Resolve the promise
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/messages`);
+//   const messages: Message[] = await res.json();
+//   const message = messages.find(msg => msg.readableSlug === resolvedParams.slug);
 
-  return {
-    title: message ? `ClipShare - ${message.readableSlug}` : 'Message Not Found',
-  };
-}
+//   return {
+//     title: message ? `ClipShare - ${message.readableSlug}` : 'Message Not Found',
+//   };
+// }
 
 // Use explicit type for Server Component props
-export default async function ReadableLinkPage({
-  params,
-}: {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+
+export default async function ReadableLinkPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params; // Resolve the promise
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/messages`);
   if (!res.ok) throw new Error('Failed to fetch messages');
   const messages: Message[] = await res.json();
-  const message = messages.find(msg => msg.readableSlug === params.slug);
+  const message = messages.find(msg => msg.readableSlug === resolvedParams.slug);
 
   if (!message) notFound();
 
