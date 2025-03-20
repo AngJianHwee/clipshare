@@ -18,13 +18,8 @@ interface Message {
   isPinned: boolean;
 }
 
-// Define props explicitly for Client Component
-interface MessagePageProps {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function MessagePage({ params }: MessagePageProps) {
+// Remove named interface, use inline type
+export default function MessagePage({ params }: { params: { id: string } }) {
   const [message, setMessage] = useState<Message | null>(null);
 
   useEffect(() => {
