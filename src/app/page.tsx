@@ -38,24 +38,24 @@ export default function Home() {
 
   const seedInitialMessages = async () => {
     const initialMessages: Omit<Message, 'id'>[] = [
-      {
-        content: 'Important meeting notes from the quarterly review: Revenue increased by 25% YoY. New product launch scheduled for Q3 2025. Customer satisfaction score at 92%.',
-        timestamp: '2025-03-14T09:30:00.000Z',
-        readableSlug: 'quarterly-review-notes',
-        isPinned: true,
-      },
-      {
-        content: 'API Documentation v2.0: Updated endpoints for user authentication. Added rate limiting headers. Deprecated legacy payment methods.',
-        timestamp: '2025-03-14T08:15:00.000Z',
-        readableSlug: 'api-documentation',
-        isPinned: false,
-      },
-      {
-        content: 'Project timeline update: UI/UX redesign - March 20, Backend migration - April 5, Testing phase - April 15, Production deployment - May 1',
-        timestamp: '2025-03-13T16:45:00.000Z',
-        readableSlug: 'project-timeline',
-        isPinned: false,
-      },
+      // {
+      //   content: 'Important meeting notes from the quarterly review: Revenue increased by 25% YoY. New product launch scheduled for Q3 2025. Customer satisfaction score at 92%.',
+      //   timestamp: '2025-03-14T09:30:00.000Z',
+      //   readableSlug: 'quarterly-review-notes',
+      //   isPinned: true,
+      // },
+      // {
+      //   content: 'API Documentation v2.0: Updated endpoints for user authentication. Added rate limiting headers. Deprecated legacy payment methods.',
+      //   timestamp: '2025-03-14T08:15:00.000Z',
+      //   readableSlug: 'api-documentation',
+      //   isPinned: false,
+      // },
+      // {
+      //   content: 'Project timeline update: UI/UX redesign - March 20, Backend migration - April 5, Testing phase - April 15, Production deployment - May 1',
+      //   timestamp: '2025-03-13T16:45:00.000Z',
+      //   readableSlug: 'project-timeline',
+      //   isPinned: false,
+      // },
     ];
 
     for (const msg of initialMessages) {
